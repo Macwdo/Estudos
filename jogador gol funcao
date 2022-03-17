@@ -1,10 +1,13 @@
 def ficha(jog='', gol=''):
+    gol = gol.upper()
     if jog == '' and gol == '':
         jog = '<JOGADOR>'
         gol = 0
     if jog == '':
         jog = '<JOGADOR>'
-    if gol.istitle():
+    if gol.isspace():
+        gol = 0
+    if gol.isupper():
         gol = 0
     if gol == '':
         gol = 0
