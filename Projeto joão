@@ -1,0 +1,87 @@
+import sqlite3
+banco = sqlite3.connect('banco_joao.db')
+cursor = banco.cursor()
+
+#cursor.execute("CREATE TABLE imoveis (endereço text,estado text,preço integer)")
+while True:
+    menu = str(input("""\33[1;31m 
+ [1]\33[1:38m Cadastrar Imovel 
+\33[1;31m [2]\33[1:38m Listar Imoveis
+\33[1;31m [3]\33[1:38m Buscar Imoveis     
+\33[1;31m [4]\33[1:38m Fechar Programa
+            
+\33[1:37mDigite sua opção:\33[0m\33[1:38m"""))
+    if menu == '1':
+        cursor.execute(f"INSERT INTO imoveis VALUES('{str(input('Digite o Endereço : ')).capitalize().strip()}', '{str(input('Digite o Estado : ')).upper().strip()}', '{int(input('Digite o Preço R$ '))}')")
+        banco.commit()
+        print('\33[1:32m---Imovél Cadastrado---')
+
+    elif menu == '2':
+        im = cursor.execute(f"SELECT * FROM imoveis ORDER BY preço DESC")
+        print('\33[1:32m---Imoveis Cadastrados---')
+        for k,c in enumerate(im):
+            print(f'\33[1;31m{k + 1}º\33[1:38m Apartamento {c[0]} | Estado do {c[1]:^5} | R${c[2]}')
+
+
+    elif menu == '3':
+        while True:
+            pesquisa = str(input("""Você quer buscar Imovél por :
+ \33[1;31m[1]\33[1:38m Endereço
+ \33[1;31m[2]\33[1:38m Estado
+ \33[1;31m[3]\33[1:38m Valores
+ \33[1;31m[4]\33[1:38m Fechar pesquisa
+            """)).strip()
+            if pesquisa == '1':
+                while True:
+                    end = str(input('Digite o Endereço [ STOP finaliza a busca ]: ')).strip()
+                    if end == 'STOP':
+                        break
+                    else:
+                        cursor.execute(f"SELECT * FROM imoveis WHERE endereço = '{end}'")
+                        prnt_end = cursor.execute(f"SELECT * FROM imoveis WHERE endereço = '{end}'")
+                        print(f'Imoveis do endereço :  {end}')
+
+                        for k,c in enumerate(prnt_end):
+                            print(f' \33[1;31m{k + 1}º\33[1:38m Apartamento {c[0]} | Estado do {c[1]} | R${c[2]}')
+
+            elif pesquisa == '2':
+                while True:
+                    est = str(input('Digite o Estado [ STOP finaliza a busca ]: ')).upper().strip()
+                    if est == 'STOP':
+                        break
+                    else:
+                        cursor.execute(f"SELECT * FROM imoveis WHERE estado = '{est}'")
+                        prnt_est = cursor.execute(f"SELECT * FROM imoveis WHERE estado = '{est}'")
+                        print(f'Imoveis do Estado : {est}')
+
+                        for k, c in enumerate(prnt_est):
+                            print(f' \33[1;31m{k + 1}º\33[1:38m Apartamento {c[0]} | Estado do {c[1]} | R${c[2]}')
+
+            elif pesquisa == '3':
+                val = str(input('Digite o Preço [ STOP finaliza a busca ]: ')).upper().strip()
+                if val == 'STOP':
+                    break
+                else:
+                    cursor.execute(f"SELECT * FROM imoveis WHERE preço = {val}")
+                    prnt_val = cursor.execute(f"SELECT * FROM imoveis WHERE preço <= '{val}'")
+                    print(f'Imoveis do com o valor de R${val} ou menor')
+
+                    for k, c in enumerate(prnt_val):
+                        print(f' \33[1;31m{k + 1}º\33[1:38m Apartamento {c[0]} | Estado do {c[1]} | R${c[2]}')
+
+            elif pesquisa == '4':
+                break
+
+            else:
+                print(' \33[1;31mError')
+                print(' \33[1;31mDigite uma opção valida')
+
+    elif menu == '4':
+        break
+
+    else:
+        print('\33[1;31mERROR')
+        print('\33[1;31mDIGITE UMA OPÇÃO VALIDA !')
+
+
+
