@@ -1,0 +1,48 @@
+#include <iostream>
+
+using namespace std;
+
+int
+main ()
+{
+  int numproduto;
+  cout << "Qual Lugar é Produto\n";
+  cin >> numproduto;
+  if (numproduto == 1)
+    {
+      cout << "O Produto é do Sul";
+    }
+  else if (numproduto == 2)
+    {
+      cout << "O Produto é do Norte";
+    }
+  else if (numproduto == 3)
+    {
+      cout << "O Produto é do Leste";
+    }
+  else if (numproduto == 4)
+    {
+      cout << "O Produto é do Oeste";
+    }
+  else if (numproduto == 5 or numproduto == 6)
+    {
+      cout << "O Produto é do Nordeste";
+    }
+  else if (numproduto == 7 or numproduto == 8 or numproduto == 9)
+    {
+      cout << "O Produto é do Sudeste";
+    }
+  else if (10 <= numproduto and numproduto <= 20)
+    {
+      cout << "O Produto é do Centro-Oeste";
+    }
+  else if (21 <= numproduto and numproduto <= 30)
+    {
+      cout << "O Produto é do Sudoeste";
+    }
+  else
+    {
+      cout << "O Produto não existe";
+    }
+  return 0;
+}
