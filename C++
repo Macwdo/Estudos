@@ -1,0 +1,23 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main()
+{
+    int i,k;
+    string lista[3][4] = {
+        {"porsche","ferrari","fiat","lexus",},
+        {"azul","vermelho","preto","branco"},
+        {"carro","moto","onibus","caminhao"}
+    };
+    for (i=0;i<4;i+=1){
+        cout << "-=-" << endl;
+        for (k=0;k<4;k+=1){
+            cout << lista[i][k] << endl;
+        }
+    }
+        
+        
+        
+    return 0;
+}
