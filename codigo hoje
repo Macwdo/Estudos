@@ -1,0 +1,28 @@
+import sqlite3
+
+bd = sqlite3.connect('novo.db')
+cursor = bd.cursor()
+# db.execute('CREATE TABLE clientes("nome" , "sobrenome", idade)')
+# 1 Criar
+"""cursor.execute('INSERT INTO clientes VALUES("Pedro","Miranda",21)')
+cursor.execute('INSERT INTO clientes VALUES("Carlos","Miranda",15)')
+cursor.execute('INSERT INTO clientes VALUES("Junior","Verdano",11)')
+cursor.execute('INSERT INTO clientes VALUES("Jhonny","Piroca",41)')
+cursor.execute('INSERT INTO clientes VALUES("DaNiLO","MACEDO",17)')
+cursor.execute('INSERT INTO clientes VALUES("KAUA","VIRga",24)')
+cursor.execute('INSERT INTO clientes VALUES("Carlos","Paulo",24)')
+cursor.execute('INSERT INTO clientes VALUES("Moisés","Paulo",53)')"""
+
+# 2 Ler
+selec = cursor.execute('SELECT * FROM clientes WHERE idade < 18 ORDER BY idade DESC') # Seleção dos dados
+for ind, value in enumerate(selec):
+   print(ind,value)
+   
+# 3 Update
+update = cursor.execute(' UPDATE clientes SET nome = "Danilo" WHERE nome = "Jhonny" ')
+
+# 4 Delete
+delete = cursor.execute('DELETE FROM clientes WHERE idade < 18')
+selec = cursor.execute('SELECT * FROM clientes') # Seleção dos dados
+for ind, value in enumerate(selec):
+   print(ind,value)
